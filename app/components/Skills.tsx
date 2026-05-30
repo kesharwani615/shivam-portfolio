@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { animate } from 'animejs';
+import { animate, type Target } from 'animejs';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -102,12 +102,14 @@ export default function Skills() {
           });
 
           animate(skillBars, {
-            width: (el: HTMLElement) => {
-              const level = parseInt(el.getAttribute('data-level') || '0');
+            width: (target: Target) => {
+              const level = parseInt(
+                (target as HTMLElement).getAttribute('data-level') || '0'
+              );
               return `${level}%`;
             },
             duration: 2000,
-            delay: (el: HTMLElement, i: number) => i * 100,
+            delay: (_target: Target, i: number) => i * 100,
             easing: 'easeOutExpo',
           });
         },
